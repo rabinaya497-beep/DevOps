@@ -1,0 +1,21 @@
+# azure-pipelines.yml
+
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: Maven@4
+    displayName: 'Build Maven Project'
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'clean verify'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.17'
+      mavenVersionOption: 'Default'
