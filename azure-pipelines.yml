@@ -1,11 +1,21 @@
-- task: Maven@4
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+- task: UseJavaVersion@1
+  inputs:
+    versionSpec: '11'
+
+- task: Maven@3
   displayName: 'Run Tests'
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'clean test'
-    options: '-X'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.7'
-    mavenVersionOption: 'Default'
