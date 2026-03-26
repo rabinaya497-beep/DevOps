@@ -8,10 +8,6 @@ pool:
 
 steps:
 
-- task: UseJavaVersion@1
-  inputs:
-    versionSpec: '11'
-
 - task: Maven@3
   displayName: 'Run Tests'
   inputs:
